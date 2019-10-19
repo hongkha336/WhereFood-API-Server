@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FoodModel extends Model
 {
     protected $table = 'food';
-    protected $fillable = ['FoodID', 'UserID', 'CommentID','CommentToken', 'CommentContent', 'Status'];
+    protected $fillable = ['FoodID', 'FoodName', 'PictureToken','Prices', 'ShortDescription', 'LongDescription','AvgSurvey','RestaurentID','Status'];
     public $timestamps = true;
 
     //get all food in table

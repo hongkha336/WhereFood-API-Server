@@ -22,6 +22,7 @@ Route::group(['prefix'=>'food','middleware'=>['wherefoodmiddleware']],function()
     Route::get('/getallfood',"FoodController@getAllFood");
     Route::get('/getfoodbyid/{id}',"FoodController@getFoodByID");
     Route::get('/getfood/{info}',"FoodController@getFood");
+    Route::post('/insertcommandfood',"FoodController@insertCommentFood");
 });
 
 //list route of table permalink

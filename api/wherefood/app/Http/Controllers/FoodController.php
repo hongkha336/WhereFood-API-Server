@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\FoodModel;
+use App\FoodCommentModel;
 
 class FoodController extends Controller
 {
@@ -26,9 +27,11 @@ class FoodController extends Controller
         $listFood=FoodModel::getFood($info);
         return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
-    //get permalink_picture by ID of food
-    public function getPermalinkPictureByID($id)
+    //insert comment food
+    public function insertCommentFood(Request $commentFood)
     {
-        
+        $result=FoodCommentModel::insertCommentFood($commentFood);
+        echo $result;
     }
+  
 }

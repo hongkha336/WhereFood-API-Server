@@ -11,12 +11,19 @@ class FoodModel extends Model
     protected $fillable = ['FoodID', 'UserID', 'CommentID','CommentToken', 'CommentContent', 'Status'];
     public $timestamps = true;
 
+    //get all food in table
     public static function getAllFood()
     {
         return DB::table('food')->get();
     }
+    //get all food in table by ID
     public static function getFoodByID($id)
     {
-        return DB::table('food')->where("FoodID",$id)->get();
+        return DB::table('food')->where("FoodID",$id)->first(); 
+    }
+    //get all food when search
+    public static function getFood($info)
+    {
+        return DB::table('food')->where("FoodName","LIKE","%$info%")->get();
     }
 }

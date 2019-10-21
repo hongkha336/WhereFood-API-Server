@@ -14,4 +14,11 @@ class SurveyController extends Controller
         $result=FoodSurveyModel::insertFoodSurvey($foodsurvey);
         echo $result;
     }
+
+    //get surveypoint by foodid and userid
+    public function getSurveyPointByFoodIDAndUserID(Request $foodsurvey)
+    {
+        $result=FoodSurveyModel::getSurveyPointByFoodIDAndUserID($foodsurvey);
+        echo $result;
+    }
 }

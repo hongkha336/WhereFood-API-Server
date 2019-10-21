@@ -21,4 +21,11 @@ class FoodSurveyModel extends Model
             ]
         );
     }
+    public static function getSurveyPointByFoodIDAndUserID($foodsurvey)
+    {
+        return DB::table('food_survey')
+        ->select('SurveyPoint')
+        ->where('FoodID',$foodsurvey->input('FoodID'))
+        ->where('UserID',$foodsurvey->input('UserID'))->first();
+    }
 }

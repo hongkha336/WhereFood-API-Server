@@ -23,10 +23,6 @@ Route::group(['prefix'=>'food','middleware'=>['wherefoodmiddleware']],function()
     Route::get('/getallfood'        ,"FoodController@getAllFood");
     Route::get('/getfoodbyid/{id}'  ,"FoodController@getFoodByID");
     Route::get('/getfood/{info}'    ,"FoodController@getFood");
-    //post
-    Route::post('/insertfoodcomment',"CommentController@insertFoodComment");
-    Route::post('/insertfoodsurvey',"SurveyController@insertFoodSurvey");
-    
 });
 
 //list api for food comment

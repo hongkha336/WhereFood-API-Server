@@ -24,9 +24,21 @@ Route::group(['prefix'=>'food','middleware'=>['wherefoodmiddleware']],function()
     Route::get('/getfoodbyid/{id}'  ,"FoodController@getFoodByID");
     Route::get('/getfood/{info}'    ,"FoodController@getFood");
     //post
-    Route::post('/insertfoodcomment',"FoodController@insertFoodComment");
-    Route::post('/insertfoodsurvey',"FoodController@insertFoodSurvey");
+    Route::post('/insertfoodcomment',"CommentController@insertFoodComment");
+    Route::post('/insertfoodsurvey',"SurveyController@insertFoodSurvey");
     
+});
+
+//list api for food comment
+Route::group(['prefix'=>'foodcomment','middleware'=>['wherefoodmiddleware']],function(){
+    //post
+    Route::post('/insertfoodcomment',"CommentController@insertFoodComment");
+});
+
+//list api for food survey
+Route::group(['prefix'=>'foodsurvey','middleware'=>['wherefoodmiddleware']],function(){
+    //post
+    Route::post('/insertfoodsurvey',"SurveyController@insertFoodSurvey");
 });
 
 //list route of table permalink
@@ -36,11 +48,12 @@ Route::group(['prefix'=>'permalink','middleware'=>['wherefoodmiddleware']],funct
 });
 //route error when don't have token
 Route::get('/error',function(){
+    return response()->json("You don't have permission to  rest this API",200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     echo "You don't have permission to  rest this API";
     })->name('error','[A-Za-z]+');
 
 //route admin
-Route::group(['prefix'=>'admin','middleware'=>['wherefoodmiddleware']],function(){
+Route::group(['prefix'=>'admin'],function(){
     //get
     Route::post('/loginadmin',"AdminController@loginAdmin");
 });

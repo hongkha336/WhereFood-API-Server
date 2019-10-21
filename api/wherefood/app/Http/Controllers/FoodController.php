@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\FoodModel;
-use App\FoodCommentModel;
-use App\FoodSurveyModel;
 
 class FoodController extends Controller
 {
@@ -28,17 +26,4 @@ class FoodController extends Controller
         $listFood=FoodModel::getFood($info);
         return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
-    //insert comment food
-    public function insertFoodComment(Request $foodcomment)
-    {
-        $result=FoodCommentModel::insertFoodComment($foodcomment);
-        echo $result;
-    }
-    //insert food survey
-    public function insertFoodSurvey(Request $foodsurvey)
-    {
-        $result=FoodSurveyModel::insertFoodSurvey($foodsurvey);
-        echo $result;
-    }
-  
 }

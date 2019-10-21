@@ -25,4 +25,14 @@ class FoodCommentModel extends Model
             ]
         );
     }
+
+    //get commentcontent by foodid 
+    public static function getCommentContentByFoodID($foodID)
+    {
+        return DB::table('food_comment')
+        ->select('UserID','CommentContent')
+        ->where('FoodID',$foodID)
+        ->where('Status',1)
+        ->get();
+    }
 }

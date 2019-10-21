@@ -13,4 +13,11 @@ class CommentController extends Controller
         $result=FoodCommentModel::insertCommentFood($foodcomment);
         echo $result;
     }
+
+    //get commentcontent by foodid 
+    public function getCommentContentByFoodID($foodID)
+    {
+        $res=FoodCommentModel::getCommentContentByFoodID($foodID);
+        return response()->json($res,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
 }

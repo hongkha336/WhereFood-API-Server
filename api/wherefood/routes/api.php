@@ -27,12 +27,17 @@ Route::group(['prefix'=>'food','middleware'=>['wherefoodmiddleware']],function()
 
 //list api for food comment
 Route::group(['prefix'=>'foodcomment','middleware'=>['wherefoodmiddleware']],function(){
+    //get
+    Route::get('/getcommentcontentbyfoodid/{foodid}',"CommentController@getCommentContentByFoodID");
     //post
     Route::post('/insertfoodcomment',"CommentController@insertFoodComment");
 });
 
 //list api for food survey
 Route::group(['prefix'=>'foodsurvey','middleware'=>['wherefoodmiddleware']],function(){
+
+    //get
+    Route::post('/getsurveypointbyfoodidanduserid/{foodID}/{userID}',"SurveyController@getSurveyPointByFoodIDAndUserID");
     //post
     Route::post('/insertfoodsurvey',"SurveyController@insertFoodSurvey");
 });

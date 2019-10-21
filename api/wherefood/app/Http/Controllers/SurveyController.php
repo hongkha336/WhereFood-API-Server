@@ -16,9 +16,9 @@ class SurveyController extends Controller
     }
 
     //get surveypoint by foodid and userid
-    public function getSurveyPointByFoodIDAndUserID(Request $foodsurvey)
+    public function getSurveyPointByFoodIDAndUserID($foodID,$UserID)
     {
-        $result=FoodSurveyModel::getSurveyPointByFoodIDAndUserID($foodsurvey);
+        $result=FoodSurveyModel::getSurveyPointByFoodIDAndUserID($foodID,$UserID);
         echo $result;
     }
 }

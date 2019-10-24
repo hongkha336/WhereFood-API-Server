@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //list route of table food
-Route::group(['prefix'=>'food','middleware'=>['wherefoodmiddleware']],function(){
+Route::group(['prefix'=>'food'],function(){
     //get
     Route::get('/getallfood'        ,"FoodController@getAllFood");
     Route::get('/getfoodbyid/{id}'  ,"FoodController@getFoodByID");
@@ -29,15 +29,17 @@ Route::group(['prefix'=>'food','middleware'=>['wherefoodmiddleware']],function()
     Route::post('/updatefood',"FoodController@updateFoodByIdFood");
 });
 //list api for food comment
-Route::group(['prefix'=>'foodcomment','middleware'=>['wherefoodmiddleware']],function(){
+Route::group(['prefix'=>'foodcomment'],function(){
     //get
     Route::get('/getcommentcontentbyfoodid/{foodid}',"CommentController@getCommentContentByFoodID");
     //post
     Route::post('/insertfoodcomment',"CommentController@insertFoodComment");
+    Route::post('/updatestatuscmtbytokencmt',"CommentController@updateStatusCommentByCmtToken");
+    Route::post('/updatecommentcmtbytokencmt',"CommentController@updateContentCommentByCmtToken");
 });
 
 //list api for food survey
-Route::group(['prefix'=>'foodsurvey','middleware'=>['wherefoodmiddleware']],function(){
+Route::group(['prefix'=>'foodsurvey'],function(){
 
     //get
     Route::post('/getsurveypointbyfoodidanduserid/{foodID}/{userID}',"SurveyController@getSurveyPointByFoodIDAndUserID");
@@ -46,7 +48,7 @@ Route::group(['prefix'=>'foodsurvey','middleware'=>['wherefoodmiddleware']],func
 });
 
 //list route of table permalink
-Route::group(['prefix'=>'permalink','middleware'=>['wherefoodmiddleware']],function(){
+Route::group(['prefix'=>'permalink'],function(){
     //get
     Route::get('/getpermalinkbyid/{id}',"PermalinkController@getPermalinkPictureByID");
 });

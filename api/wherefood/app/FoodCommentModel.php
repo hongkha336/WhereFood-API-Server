@@ -35,4 +35,16 @@ class FoodCommentModel extends Model
         ->where('Status',1)
         ->get();
     }
+    
+    //update status comment by tokencomment
+    public static function updateContentCommentByCmtToken($request)
+    {
+        return DB::table('food_comment')
+        ->where('CommentToken',$request->input('CommentToken'))
+        ->update(
+            [
+                'CommentContent'=>$request->input('CommentContent')
+            ]
+        );
+    }
 }

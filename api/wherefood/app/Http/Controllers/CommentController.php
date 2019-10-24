@@ -20,4 +20,12 @@ class CommentController extends Controller
         $res=FoodCommentModel::getCommentContentByFoodID($foodID);
         return response()->json($res,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
+
+    //update status comment by tokencomment
+    public function updateContentCommentByCmtToken(Request $request)
+    {
+        $result=FoodCommentModel::updateContentCommentByCmtToken($request);
+        echo $result;
+    }
 }
+

@@ -33,4 +33,36 @@ class FoodModel extends Model
         ->where("Status",1)
         ->get();
     }
+    // update status food by id food
+    public static function updateStatusFoodByIdFood($request)
+    {
+        return DB::table('food')->where('FoodID',$request->input('FoodID'))->update(
+            [
+                'Status'=> $request->input('Status')
+            ]
+        );
+    }
+    // update food by id food
+    public static function updateFoodByIdFood($request)
+    {
+        return DB::table('food')->where('FoodID',$request->input('FoodID'))->update(
+            [
+                'FoodName'=>$request->input('FoodName'),
+                'Prices'=>$request->input('Prices'),
+                'ShortDescription'=>$request->input('ShortDescription'),
+                'LongDescription'=>$request->input('LongDescription')
+            ]
+        );
+    }
+
+    //getfoodandpicture
+    public static function getFoodAndPicture($info)
+    {
+        return DB::table('food')
+        ->select('FoodID', 'FoodName', 'PictureToken','Prices', 
+        'ShortDescription', 'LongDescription','AvgSurvey','RestaurantID',
+        DB::raw('(select PicturePermalink from permalink_picture where PictureToken  =   permalink_picture.Token order by FCP_ID asc limit 1) as PicturePermalink'))
+        ->where("FoodName","LIKE","%$info%")
+        ->get();
+    }
 }

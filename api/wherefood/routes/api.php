@@ -23,8 +23,11 @@ Route::group(['prefix'=>'food','middleware'=>['wherefoodmiddleware']],function()
     Route::get('/getallfood'        ,"FoodController@getAllFood");
     Route::get('/getfoodbyid/{id}'  ,"FoodController@getFoodByID");
     Route::get('/getfood/{info}'    ,"FoodController@getFood");
+    Route::get('/getfoodandpicture/{info}',"FoodController@getFoodAndPicture");
+    //post
+    Route::post('/updatestatusfood',"FoodController@updateStatusFoodByIdFood");
+    Route::post('/updatefood',"FoodController@updateFoodByIdFood");
 });
-
 //list api for food comment
 Route::group(['prefix'=>'foodcomment','middleware'=>['wherefoodmiddleware']],function(){
     //get

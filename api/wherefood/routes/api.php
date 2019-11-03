@@ -61,5 +61,5 @@ Route::get('/error',function(){
 //route admin
 Route::group(['prefix'=>'admin'],function(){
     //get
-    Route::post('/loginadmin',"AdminController@loginAdmin");
+    Route::get('/loginadmin',"AdminController@loginAdmin");
 });

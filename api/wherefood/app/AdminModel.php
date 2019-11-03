@@ -12,9 +12,9 @@ class AdminModel extends Model
 
     //check username and password of admin
     static function loginAdmin($info)
-    {
+    { 
         $res=DB::table('admin')->get();
-        //$res=DB::table('admin')->where('HashPassWord',$info->HashPassWord)->where('Account', $info->Account)->first();
+        $res=DB::table('admin')->where('HashPassWord',$info->HashPassWord)->where('Account', $info->Account)->first();
         return $res;
-    }
+    } 
 }

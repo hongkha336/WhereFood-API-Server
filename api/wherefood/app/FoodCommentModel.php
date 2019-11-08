@@ -36,7 +36,7 @@ class FoodCommentModel extends Model
         ->get();
     }
     
-    //update status comment by tokencomment
+    //update comment by tokencomment
     public static function updateContentCommentByCmtToken($request)
     {
         return DB::table('food_comment')
@@ -44,6 +44,30 @@ class FoodCommentModel extends Model
         ->update(
             [
                 'CommentContent'=>$request->input('CommentContent')
+            ]
+        );
+    }
+
+    //remove comment by foodID
+    public static function removeCommentByFoodID($request)
+    {
+        return DB::table('food_comment')
+        ->where('FoodID',$request->input('FoodID'))
+        ->update(
+            [
+                'Status'=>0
+            ]
+        );
+    }
+    //remove comment by foodID and userID
+    public static function removeCommentByFoodIDAndUserID($request)
+    {
+        return DB::table('food_comment')
+        ->where('FoodID',$request->input('FoodID'))
+        ->where('UserID',$request->input('UserID'))
+        ->update(
+            [
+                'Status'=>0
             ]
         );
     }

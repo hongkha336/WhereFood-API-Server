@@ -44,4 +44,16 @@ class FoodController extends Controller
         $listFood=FoodModel::getFoodAndPicture($info);
         return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
+
+    //add Food 
+    public function addFood(Request $request)
+    {
+        $result=FoodModel::addFood($request);
+        echo $result;
+    }
+    public static function getFoodByName($foodName)
+    {
+        $listFood=FoodModel::getFoodByName($foodName);
+        return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
 }

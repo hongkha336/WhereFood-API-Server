@@ -14,6 +14,10 @@ class PermalinkModel extends Model
     //get permalink_picture by ID of food
     public static function getPermalinkPictureByID($id)
     {
-        return DB::table('permalink_picture')->join('food', 'permalink_picture.Token', '=', 'food.PictureToken')->select('permalink_picture.PicturePermalink')->where("food.FoodID","$id")->get();
+        return DB::table('permalink_picture')
+        ->join('food', 'permalink_picture.Token', '=', 'food.PictureToken')
+        ->select('permalink_picture.PicturePermalink')
+        ->where("food.FoodID","$id")
+        ->get();
     }
 }

@@ -25,10 +25,10 @@ class FoodModel extends Model
         ->first(); 
     }
     //get all food when search
-    public static function getFood($info)
+    public static function getFood($info) 
     {
         return DB::table('food')
-        ->Select('FoodID', 'FoodName', 'PictureToken','Prices', 'ShortDescription', 'LongDescription','AvgSurvey','RestaurantID')
+        ->Select('FoodID', 'FoodName', 'PictureToken','Prices', 'ShortDescription', 'LongDescription','AvgSurvey','RestaurantID','Status')
         ->where("FoodName","LIKE","%$info%")
         ->where("Status",1)
         ->get();
@@ -47,10 +47,10 @@ class FoodModel extends Model
     {
         return DB::table('food')->where('FoodID',$request->input('FoodID'))->update(
             [
-                'FoodName'=>$request->input('FoodName'),
-                'Prices'=>$request->input('Prices'),
-                'ShortDescription'=>$request->input('ShortDescription'),
-                'LongDescription'=>$request->input('LongDescription')
+                'FoodName'          =>$request->input('FoodName'),
+                'Prices'            =>$request->input('Prices'),
+                'ShortDescription'  =>$request->input('ShortDescription'),
+                'LongDescription'   =>$request->input('LongDescription')
             ]
         );
     }
@@ -63,6 +63,35 @@ class FoodModel extends Model
         'ShortDescription', 'LongDescription','AvgSurvey','RestaurantID',
         DB::raw('(select PicturePermalink from permalink_picture where PictureToken  =   permalink_picture.Token order by FCP_ID asc limit 1) as PicturePermalink'))
         ->where("FoodName","LIKE","%$info%")
+        ->get();
+    }
+    //add Food 
+    public static function addFood($request)
+    {
+        return DB::table('food')->insert(
+            [
+                'FoodID'            => $request->input('FoodID'),
+                'FoodName'          => $request->input('FoodName'),
+                'PictureToken'      => $request->input('PictureToken'),
+                'Prices'            => $request->input('Prices'),
+                'ShortDescription'  => $request->input('ShortDescription'),
+                'LongDescription'   => $request->input('LongDescription'),
+                'AvgSurvey'         => 0,
+                'RestaurantID'      => $request->input('RestaurantID'),
+                'Status'            => 2
+            ]
+        );
+    }
+    public static function getFoodByName($foodName)
+    {
+        $param=" ".$foodName." ";
+        return DB::table('food')
+        ->join('restaurant', 'food.RestaurantID', '=', 'restaurant.RestaurantID')
+        ->select('FoodID', 'FoodName', 'PictureToken','Prices', 
+        'ShortDescription', 'LongDescription','AvgSurvey','food.RestaurantID',
+        'Latitude','Longitude',
+        DB::raw('(select PicturePermalink from permalink_picture where PictureToken  =   permalink_picture.Token order by FCP_ID asc limit 1) as PicturePermalink'))
+        ->where("FoodName","LIKE","%$foodName%")
         ->get();
     }
 }

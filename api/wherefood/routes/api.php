@@ -24,9 +24,11 @@ Route::group(['prefix'=>'food'],function(){
     Route::get('/getfoodbyid/{id}'  ,"FoodController@getFoodByID");
     Route::get('/getfood/{info}'    ,"FoodController@getFood");
     Route::get('/getfoodandpicture/{info}',"FoodController@getFoodAndPicture");
+    Route::get('/getfoodbyname/{info}',"FoodController@getFoodByName");
     //post
     Route::post('/updatestatusfood',"FoodController@updateStatusFoodByIdFood");
     Route::post('/updatefood',"FoodController@updateFoodByIdFood");
+    Route::post('/addfood',"FoodController@addFood");
 });
 //list api for food comment
 Route::group(['prefix'=>'foodcomment'],function(){
@@ -34,13 +36,13 @@ Route::group(['prefix'=>'foodcomment'],function(){
     Route::get('/getcommentcontentbyfoodid/{foodid}',"CommentController@getCommentContentByFoodID");
     //post
     Route::post('/insertfoodcomment',"CommentController@insertFoodComment");
-    Route::post('/updatestatuscmtbytokencmt',"CommentController@updateStatusCommentByCmtToken");
     Route::post('/updatecommentcmtbytokencmt',"CommentController@updateContentCommentByCmtToken");
+    Route::post('/removecommentbyfoodid',"CommentController@removeCommentByFoodID");
+    Route::post('/removecommentbyfoodidanduserid',"CommentController@removeCommentByFoodIDAndUserID");
 });
 
 //list api for food survey
 Route::group(['prefix'=>'foodsurvey'],function(){
-
     //get
     Route::post('/getsurveypointbyfoodidanduserid/{foodID}/{userID}',"SurveyController@getSurveyPointByFoodIDAndUserID");
     //post
@@ -60,6 +62,17 @@ Route::get('/error',function(){
 
 //route admin
 Route::group(['prefix'=>'admin'],function(){
-    //get
-    Route::get('/loginadmin',"AdminController@loginAdmin");
+    //post
+    Route::post('/loginadmin',"AdminController@loginAdmin");
 });
+
+//route user
+Route::group(['prefix'=>'user'],function(){
+    //get
+    Route::get('/getalluser',"UserController@getAllUser");
+    //post
+    Route::post('/insertuser',"UserController@insertUser");
+    Route::post('/updatestatustrue',"UserController@updateUserTrue");
+    Route::post('/updatestatusfalse',"UserController@updateUserFalse");
+});
+

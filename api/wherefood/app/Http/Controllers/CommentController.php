@@ -21,10 +21,22 @@ class CommentController extends Controller
         return response()->json($res,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
-    //update status comment by tokencomment
+    //update comment by tokencomment
     public function updateContentCommentByCmtToken(Request $request)
     {
         $result=FoodCommentModel::updateContentCommentByCmtToken($request);
+        echo $result;
+    }
+    //remove comment by foodID
+    public function removeCommentByFoodID(Request $request)
+    {
+        $result=FoodCommentModel::removeCommentByFoodID($request);
+        echo $result;
+    }
+    //remove comment by foodID and userID
+    public function removeCommentByFoodIDAndUserID(Request $request)
+    {
+        $result=FoodCommentModel::removeCommentByFoodIDAndUserID($request);
         echo $result;
     }
 }

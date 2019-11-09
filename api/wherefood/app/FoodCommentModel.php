@@ -18,7 +18,6 @@ class FoodCommentModel extends Model
             [
                 'FoodID'         => $foodcomment->input('FoodID'),
                 'UserID'         => $foodcomment->input('UserID'),
-                'CommentID'      => $foodcomment->input('CommentID'),
                 'CommentToken'   => $foodcomment->input('CommentToken'),
                 'CommentContent' => $foodcomment->input('CommentContent'),
                 'Status'         => $foodcomment->input('Status')
@@ -30,7 +29,7 @@ class FoodCommentModel extends Model
     public static function getCommentContentByFoodID($foodID)
     {
         return DB::table('food_comment')
-        ->select('UserID','CommentContent')
+        ->select('UserID as UserAccount','CommentContent')
         ->where('FoodID',$foodID)
         ->where('Status',1)
         ->get();
@@ -70,5 +69,49 @@ class FoodCommentModel extends Model
                 'Status'=>0
             ]
         );
+    }
+
+    //get commentcontent and picture by foodid 
+    public static function getCommentContentAndPictureByFoodID($foodID)
+    {
+        $res=array();
+        $picture=array();
+        $res= DB::table('food_comment')
+        ->select('UserID as UserAccount','CommentContent','CommentToken')
+        ->where('FoodID',$foodID)
+        ->where('Status',1)
+        ->get();
+        foreach($res as $comment)
+        {
+            $picture=DB::table('permalink_picture')
+            ->select('PicturePermalink')
+            ->where('Token',$comment->CommentToken)
+            ->get();
+            if(count($picture)>0)
+            {
+                $cp=(object)[];
+                for ($i = 0; $i < count($picture); $i++) {
+                    $cp->$i=$picture[$i]->PicturePermalink;
+                }
+                $comment->PicturePermalink=$cp;
+            }else
+            {
+                $comment->PicturePermalink=null;
+            }
+            unset($comment->CommentToken);
+        }
+        unset($picture);    
+        return $res;
+    }
+    //get commentcontent and picture by foodid join table
+    public static function getCommentContentAndPictureByFoodIDjoinTable($foodID)
+    {
+        return DB::table('food_comment')
+        ->leftJoin('permalink_picture', 'food_comment.CommentToken', '=', 'permalink_picture.Token')
+        ->select('UserID as UserAccount','CommentContent','permalink_picture.PicturePermalink','CommentID')
+        ->where('FoodID',$foodID)
+        ->where('Status',1)
+        ->orderBy('CommentID')
+        ->get();
     }
 }

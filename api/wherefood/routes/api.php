@@ -29,11 +29,14 @@ Route::group(['prefix'=>'food'],function(){
     Route::post('/updatestatusfood',"FoodController@updateStatusFoodByIdFood");
     Route::post('/updatefood',"FoodController@updateFoodByIdFood");
     Route::post('/addfood',"FoodController@addFood");
+    Route::post('/uploadimagefood',"FoodController@uploadImageFood");
 });
 //list api for food comment
 Route::group(['prefix'=>'foodcomment'],function(){
     //get
     Route::get('/getcommentcontentbyfoodid/{foodid}',"CommentController@getCommentContentByFoodID");
+    Route::get('/getcommentcontentandpicturebyfoodid/{foodid}',"CommentController@getCommentContentAndPictureByFoodID");
+    Route::get('/getcommentcontentandpicturebyfoodidjointable/{foodid}',"CommentController@getCommentContentAndPictureByFoodIDjoinTable");
     //post
     Route::post('/insertfoodcomment',"CommentController@insertFoodComment");
     Route::post('/updatecommentcmtbytokencmt',"CommentController@updateContentCommentByCmtToken");
@@ -74,5 +77,13 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('/insertuser',"UserController@insertUser");
     Route::post('/updatestatustrue',"UserController@updateUserTrue");
     Route::post('/updatestatusfalse',"UserController@updateUserFalse");
+});
+
+//Load image
+Route::post('/uploadhinh',function(Request $request){
+    $filename=$request->file('photo')->getClientOriginalName();
+    $path  = $request->file('photo')->move(base_path().("/pictures"),$filename);
+    $photoURL=base_path().("/pictures/".$filename);
+    return response()->json(['url'=>$photoURL],200);
 });
 

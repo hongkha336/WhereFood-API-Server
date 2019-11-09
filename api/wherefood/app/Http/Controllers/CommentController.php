@@ -39,5 +39,19 @@ class CommentController extends Controller
         $result=FoodCommentModel::removeCommentByFoodIDAndUserID($request);
         echo $result;
     }
+
+    //get commentcontent and picture by foodid 
+    public function getCommentContentAndPictureByFoodID($foodID)
+    {
+        $res=FoodCommentModel::getCommentContentAndPictureByFoodID($foodID);
+        return response()->json($res,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    //get commentcontent and picture by foodid join table
+    public function getCommentContentAndPictureByFoodIDjoinTable($foodID)
+    {
+        $res=FoodCommentModel::getCommentContentAndPictureByFoodIDjoinTable($foodID);
+        return response()->json($res,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
 }
 

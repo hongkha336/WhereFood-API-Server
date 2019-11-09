@@ -84,7 +84,6 @@ class FoodModel extends Model
     }
     public static function getFoodByName($foodName)
     {
-        $param=" ".$foodName." ";
         return DB::table('food')
         ->join('restaurant', 'food.RestaurantID', '=', 'restaurant.RestaurantID')
         ->select('FoodID', 'FoodName', 'PictureToken','Prices', 

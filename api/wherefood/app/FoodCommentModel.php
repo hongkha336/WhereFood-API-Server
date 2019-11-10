@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FoodCommentModel extends Model
 {
     protected $table = 'food_comment';
-    protected $fillable = ['FoodID', 'UserID', 'CommentID','CommentToken', 'CommentContent', 'Status'];
+    protected $fillable = ['FoodID', 'UserID', 'CommentID','CommentToken', 'CommentContent','SurveyPoint','datetime_comment', 'Status'];
     public $timestamps = true;
 
     //insert comment for food
@@ -16,11 +16,13 @@ class FoodCommentModel extends Model
     {
         return DB::table('food_comment')->insert(
             [
-                'FoodID'         => $foodcomment->input('FoodID'),
-                'UserID'         => $foodcomment->input('UserID'),
-                'CommentToken'   => $foodcomment->input('CommentToken'),
-                'CommentContent' => $foodcomment->input('CommentContent'),
-                'Status'         => $foodcomment->input('Status')
+                'FoodID'            => $foodcomment->input('FoodID'),
+                'UserID'            => $foodcomment->input('UserID'),
+                'CommentToken'      => $foodcomment->input('CommentToken'),
+                'CommentContent'    => $foodcomment->input('CommentContent'),
+                'SurveyPoint'       => $foodcomment->input('SurveyPoint'),
+                'datetime_comment'  => $foodcomment->input('datetime_comment'),
+                'Status'            => 1
             ]
         );
     }
@@ -77,7 +79,7 @@ class FoodCommentModel extends Model
         $res=array();
         $picture=array();
         $res= DB::table('food_comment')
-        ->select('UserID as UserAccount','CommentContent','CommentToken')
+        ->select('UserID as UserAccount','CommentContent','CommentToken','SurveyPoint','datetime_comment')
         ->where('FoodID',$foodID)
         ->where('Status',1)
         ->get();
@@ -108,7 +110,7 @@ class FoodCommentModel extends Model
     {
         return DB::table('food_comment')
         ->leftJoin('permalink_picture', 'food_comment.CommentToken', '=', 'permalink_picture.Token')
-        ->select('UserID as UserAccount','CommentContent','permalink_picture.PicturePermalink','CommentID')
+        ->select('UserID as UserAccount','CommentContent','permalink_picture.PicturePermalink','CommentID','SurveyPoint','datetime_comment')
         ->where('FoodID',$foodID)
         ->where('Status',1)
         ->orderBy('CommentID')

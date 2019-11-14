@@ -25,6 +25,7 @@ Route::group(['prefix'=>'food'],function(){
     Route::get('/getfood/{info}'    ,"FoodController@getFood");
     Route::get('/getfoodandpicture/{info}',"FoodController@getFoodAndPicture");
     Route::get('/getfoodbyname/{info}',"FoodController@getFoodByName");
+    Route::get('/getallfoodactiveanddeactive',"FoodController@getAllFoodActiveAndDeactive");
     //post
     Route::post('/updatestatusfood',"FoodController@updateStatusFoodByIdFood");
     Route::post('/updatefood',"FoodController@updateFoodByIdFood");

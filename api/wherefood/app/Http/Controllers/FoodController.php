@@ -51,16 +51,18 @@ class FoodController extends Controller
         $result=FoodModel::addFood($request);
         echo $result;
     }
+    //get food by name
     public function getFoodByName($foodName)
     {
         $listFood=FoodModel::getFoodByName($foodName);
         return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
-    public function uploadImageFood(Request $request)
+
+    //get all food active and deactive
+    public function getAllFoodActiveAndDeactive()
     {
-        $path  = $request->file('photo')->move(base_path().("/pictures"),$request->file('photo')->getClientOriginalName());
-        $photoURL=base_path().("/pictures/".$filename);
-        return response()->json(['url'=>$photoURL],200);
+        $listFood=FoodModel::getAllFoodActiveAndDeactive();
+        return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
 }

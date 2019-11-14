@@ -88,9 +88,17 @@ class FoodModel extends Model
         ->join('restaurant', 'food.RestaurantID', '=', 'restaurant.RestaurantID')
         ->select('FoodID', 'FoodName', 'PictureToken','Prices', 
         'ShortDescription', 'LongDescription','AvgSurvey','food.RestaurantID',
-        'Latitude','Longitude',
+        'Latitude','Longitude','RestaurantAddress',
         DB::raw('(select PicturePermalink from permalink_picture where PictureToken  =   permalink_picture.Token order by FCP_ID asc limit 1) as PicturePermalink'))
         ->where("FoodName","LIKE","%$foodName%")
+        ->get();
+    }
+
+    //get all food active and deactive
+    public static function getAllFoodActiveAndDeactive()
+    {
+        return Db::table('food')
+        ->where('Status','<>',2)
         ->get();
     }
 }

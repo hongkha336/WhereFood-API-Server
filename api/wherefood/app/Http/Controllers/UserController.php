@@ -30,4 +30,18 @@ class UserController extends Controller
         $res= UserModel::updateUserFalse($infoUser);
         return response()->json($res,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
+
+    //register
+    public function registerAccount(Request $request)
+    {
+        $res= UserModel::registerAccount($request);
+        echo $res;
+    }
+
+    //login
+    public function loginAccount(Request $request)
+    {
+        $res= UserModel::loginAccount($request);
+        echo $res;
+    }
 }

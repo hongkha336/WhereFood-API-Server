@@ -78,6 +78,8 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('/insertuser',"UserController@insertUser");
     Route::post('/updatestatustrue',"UserController@updateUserTrue");
     Route::post('/updatestatusfalse',"UserController@updateUserFalse");
+    Route::post('/registeraccount',"UserController@registerAccount");
+    Route::post('/loginaccount',"UserController@loginAccount");
 });
 
 //Load image

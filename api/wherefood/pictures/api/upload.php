@@ -1,7 +1,7 @@
 <?php
     $target_dir = "../";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
-    $file_save = "pictures/api/" . basename($_FILES["file"]["name"]);
+    $file_save = "pictures/" . basename($_FILES["file"]["name"]);
     $response = array('success' => false, 'message' => 'FALSE');
 
     $data = $_POST['sender_information'];

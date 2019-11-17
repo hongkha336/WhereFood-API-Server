@@ -44,4 +44,11 @@ class UserController extends Controller
         $res= UserModel::loginAccount($request);
         echo $res;
     }
+
+    //check exist phone number
+    public function checkExistPhoneNumber($phoneNumber)
+    {
+        $res= UserModel::checkExistPhoneNumber($phoneNumber);
+        echo $res;
+    }
 }

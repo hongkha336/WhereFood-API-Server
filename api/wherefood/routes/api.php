@@ -74,6 +74,7 @@ Route::group(['prefix'=>'admin'],function(){
 Route::group(['prefix'=>'user'],function(){
     //get
     Route::get('/getalluser',"UserController@getAllUser");
+    Route::get('/checkexistphonenumber/{phonenumber}',"UserController@checkExistPhoneNumber");
     //post
     Route::post('/insertuser',"UserController@insertUser");
     Route::post('/updatestatustrue',"UserController@updateUserTrue");

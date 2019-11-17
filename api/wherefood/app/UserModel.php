@@ -83,19 +83,34 @@ class UserModel extends Model
         ->first();
         if($user==null)
         {
-            return -5;//Không có username or pass
+            return -5;//no have username or pass
         }
         else
         {
             $pass=$request->input('HashPassWord');
             if($user->HashPassWord==md5($pass))
             {
-                return 1; //thành công
+                return 1; //success
             }
             else
             {
-                return 0;//thất bại
+                return 0;//fail
             }
+        }
+    }
+    //check exist phone number
+    public static function checkExistPhoneNumber($phoneNumber)
+    {
+        $user=DB::table('user')
+        ->where('PhoneNumber',$phoneNumber)
+        ->first();
+        if($user==null)
+        {
+            return -1;//no exist
+        }
+        else
+        {
+            return 1;// exist
         }
     }
 }

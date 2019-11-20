@@ -101,4 +101,32 @@ class FoodModel extends Model
         ->where('Status','<>',2)
         ->get();
     }
+
+    //get all food waitting
+    public static function getAllFoodWaitting()
+    {
+        return Db::table('food')
+        ->where('Status',2)
+        ->get();
+    }
+
+    //update status active
+    public static function updateStatusActive($request)
+    {
+        return DB::table('food')->where('FoodID',$request->input('FoodID'))->update(
+            [
+                'Status'=> 1
+            ]
+        );
+    }
+    //update status deactive
+    public static function updateStatusDeactive($request)
+    {
+        return DB::table('food')->where('FoodID',$request->input('FoodID'))->update(
+            [
+                'Status'=> 0
+            ]
+        );
+    }
+    
 }

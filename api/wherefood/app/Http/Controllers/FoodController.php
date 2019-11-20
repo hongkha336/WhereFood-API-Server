@@ -58,11 +58,31 @@ class FoodController extends Controller
         return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
-    //get all food active and deactive
+    //get all food active and deactive 
     public function getAllFoodActiveAndDeactive()
     {
         $listFood=FoodModel::getAllFoodActiveAndDeactive();
         return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    //get all food waitting
+    public function getAllFoodWaitting()
+    {
+        $listFoodWait=FoodModel::getAllFoodWaitting();
+        return response()->json($listFoodWait,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    //update status active
+    public function updateStatusActive(Request $request)
+    {
+        $rs=FoodModel::updateStatusActive($request);
+        echo $rs;
+    }
+    //update status deactive
+    public function updateStatusDeactive(Request $request)
+    {
+        $rs=FoodModel::updateStatusDeactive($request);
+        echo $rs;
     }
 
 }

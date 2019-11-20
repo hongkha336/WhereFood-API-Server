@@ -26,11 +26,14 @@ Route::group(['prefix'=>'food'],function(){
     Route::get('/getfoodandpicture/{info}',"FoodController@getFoodAndPicture");
     Route::get('/getfoodbyname/{info}',"FoodController@getFoodByName");
     Route::get('/getallfoodactiveanddeactive',"FoodController@getAllFoodActiveAndDeactive");
+    Route::get('/getallfoodwaitting',"FoodController@getAllFoodWaitting");
     //post
     Route::post('/updatestatusfood',"FoodController@updateStatusFoodByIdFood");
     Route::post('/updatefood',"FoodController@updateFoodByIdFood");
     Route::post('/addfood',"FoodController@addFood");
     Route::post('/uploadimagefood',"FoodController@uploadImageFood");
+    Route::post('/updatestatusactive',"FoodController@updateStatusActive");
+    Route::post('/updatestatusdeactive',"FoodController@updateStatusDeactive");
 });
 //list api for food comment
 Route::group(['prefix'=>'foodcomment'],function(){

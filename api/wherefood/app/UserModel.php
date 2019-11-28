@@ -113,4 +113,38 @@ class UserModel extends Model
             return 1;// exist
         }
     }
+
+    //get user by user account
+    public static function getUserByAccount($userAccount)
+    {
+        return DB::table('user')
+        ->where('UserAccount',$userAccount)
+        ->first();
+    }
+
+    //update user by user account
+    public static function updateuUserByUserAccount($request)
+    {
+        $user=DB::table('user')
+        ->where('PhoneNumber', $request->input('PhoneNumber'))
+        ->where('UserAccount','<>',$request->input('UserAccount'))
+        ->first();
+        if($user!=null)
+        {
+            return -4;//trùng phonenumber
+        }
+        else
+        {
+            $pass=$request->input('HashPassWord');
+            return DB::table('user')
+            ->where('UserAccount',$request->input('UserAccount'))
+            ->update(
+                [
+                    'FullName'      => $request->input('FullName'),
+                    'DateOfBirth'   => $request->input('DateOfBirth'),
+                    'PhoneNumber'   => $request->input('PhoneNumber')
+                ]
+            );
+        }
+    }
 }

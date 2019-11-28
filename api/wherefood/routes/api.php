@@ -27,6 +27,8 @@ Route::group(['prefix'=>'food'],function(){
     Route::get('/getfoodbyname/{info}',"FoodController@getFoodByName");
     Route::get('/getallfoodactiveanddeactive',"FoodController@getAllFoodActiveAndDeactive");
     Route::get('/getallfoodwaitting',"FoodController@getAllFoodWaitting");
+    Route::get('/getallfoodactiveanddeactivewithinforestaurant',"FoodController@getAllFoodActiveAndDeactiveWithInfoRestaurant");
+    Route::get('/getallfoodwaittingwithinforestaurant',"FoodController@getAllFoodWaittingWithInfoRestaurant");
     //post
     Route::post('/updatestatusfood',"FoodController@updateStatusFoodByIdFood");
     Route::post('/updatefood',"FoodController@updateFoodByIdFood");
@@ -78,12 +80,14 @@ Route::group(['prefix'=>'user'],function(){
     //get
     Route::get('/getalluser',"UserController@getAllUser");
     Route::get('/checkexistphonenumber/{phonenumber}',"UserController@checkExistPhoneNumber");
+    Route::get('/getuserbyuseraccount/{useraccount}',"UserController@getUserByAccount");
     //post
     Route::post('/insertuser',"UserController@insertUser");
     Route::post('/updatestatustrue',"UserController@updateUserTrue");
     Route::post('/updatestatusfalse',"UserController@updateUserFalse");
     Route::post('/registeraccount',"UserController@registerAccount");
     Route::post('/loginaccount',"UserController@loginAccount");
+    Route::post('/updateuserbyuseraccount',"UserController@updateuUserByUserAccount");
 });
 
 //Load image

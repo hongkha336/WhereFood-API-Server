@@ -46,9 +46,22 @@ class UserController extends Controller
     }
 
     //check exist phone number
-    public function checkExistPhoneNumber($phoneNumber)
+    public function checkExistPhoneNumber($phoneNumber) 
     {
         $res= UserModel::checkExistPhoneNumber($phoneNumber);
+        echo $res;
+    }
+
+    //get user by user account
+    public function getUserByAccount($userAccount)
+    {
+        $res= UserModel::getUserByAccount($userAccount);
+        return response()->json($res,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function updateuUserByUserAccount(Request $request)
+    {
+        $res= UserModel::updateuUserByUserAccount($request);
         echo $res;
     }
 }

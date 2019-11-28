@@ -128,5 +128,21 @@ class FoodModel extends Model
             ]
         );
     }
-    
+    //get all food active and deactive with information of restaurant
+    public static function getAllFoodActiveAndDeactiveWithInfoRestaurant()
+    {
+        return Db::table('food')
+        ->join('restaurant', 'restaurant.RestaurantID', '=', 'food.RestaurantID')
+        ->where('food.Status','<>',2)
+        ->get();
+    }
+
+    //get all food waitting
+    public static function getAllFoodWaittingWithInfoRestaurant()
+    {
+        return Db::table('food')
+        ->join('restaurant', 'restaurant.RestaurantID', '=', 'food.RestaurantID')
+        ->where('food.Status',2)
+        ->get();
+    }
 }

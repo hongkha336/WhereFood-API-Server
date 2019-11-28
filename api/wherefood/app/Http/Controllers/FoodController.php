@@ -85,4 +85,18 @@ class FoodController extends Controller
         echo $rs;
     }
 
+    //get all food active and deactive with information of restaurant
+    public function getAllFoodActiveAndDeactiveWithInfoRestaurant()
+    {
+        $listFood=FoodModel::getAllFoodActiveAndDeactiveWithInfoRestaurant();
+        return response()->json($listFood,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    //get all food waitting with information of restaurant
+    public function getAllFoodWaittingWithInfoRestaurant()
+    {
+        $listFoodWait=FoodModel::getAllFoodWaittingWithInfoRestaurant();
+        return response()->json($listFoodWait,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
 }

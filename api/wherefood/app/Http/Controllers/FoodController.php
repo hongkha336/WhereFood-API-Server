@@ -98,5 +98,11 @@ class FoodController extends Controller
         $listFoodWait=FoodModel::getAllFoodWaittingWithInfoRestaurant();
         return response()->json($listFoodWait,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
+    //get food by ID nostatus
+    public function getFoodByIDNoStatus($id)
+    {
+        $food=FoodModel::getFoodByIDNoStatus($id);
+        return response()->json($food,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
 
 }

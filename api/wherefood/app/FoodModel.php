@@ -132,17 +132,27 @@ class FoodModel extends Model
     public static function getAllFoodActiveAndDeactiveWithInfoRestaurant()
     {
         return Db::table('food')
+        ->select('FoodID','FoodName','PictureToken','Prices','ShortDescription','LongDescription','AvgSurvey','food.RestaurantID','RestaurantName','food.Status')
         ->join('restaurant', 'restaurant.RestaurantID', '=', 'food.RestaurantID')
         ->where('food.Status','<>',2)
         ->get();
     }
 
-    //get all food waitting
+    //get all food waitting with information of restaurant
     public static function getAllFoodWaittingWithInfoRestaurant()
     {
         return Db::table('food')
+        ->select('FoodID','FoodName','PictureToken','Prices','ShortDescription','LongDescription','AvgSurvey','food.RestaurantID','RestaurantName','food.Status')
         ->join('restaurant', 'restaurant.RestaurantID', '=', 'food.RestaurantID')
         ->where('food.Status',2)
         ->get();
+    }
+
+    //get food by ID nostatus
+    public static function getFoodByIDNoStatus($id)
+    {
+        return DB::table('food')
+        ->where("FoodID",$id)
+        ->first(); 
     }
 }

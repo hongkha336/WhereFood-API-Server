@@ -29,6 +29,7 @@ Route::group(['prefix'=>'food'],function(){
     Route::get('/getallfoodwaitting',"FoodController@getAllFoodWaitting");
     Route::get('/getallfoodactiveanddeactivewithinforestaurant',"FoodController@getAllFoodActiveAndDeactiveWithInfoRestaurant");
     Route::get('/getallfoodwaittingwithinforestaurant',"FoodController@getAllFoodWaittingWithInfoRestaurant");
+    Route::get('/getfoodbyidnostatus/{id}',"FoodController@getFoodByIDNoStatus");
     //post
     Route::post('/updatestatusfood',"FoodController@updateStatusFoodByIdFood");
     Route::post('/updatefood',"FoodController@updateFoodByIdFood");
@@ -88,6 +89,13 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('/registeraccount',"UserController@registerAccount");
     Route::post('/loginaccount',"UserController@loginAccount");
     Route::post('/updateuserbyuseraccount',"UserController@updateuUserByUserAccount");
+});
+
+//route restaurant
+Route::group(['prefix'=>'restaurant'],function(){
+    //get
+    Route::get('/getallrestaurant',"RestaurantController@getAllRestaurant");
+    
 });
 
 //Load image

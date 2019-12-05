@@ -37,6 +37,7 @@ Route::group(['prefix'=>'food'],function(){
     Route::post('/uploadimagefood',"FoodController@uploadImageFood");
     Route::post('/updatestatusactive',"FoodController@updateStatusActive");
     Route::post('/updatestatusdeactive',"FoodController@updateStatusDeactive");
+    Route::post('/addfoodwithinforestaurant',"FoodController@addFoodWithInfoRestaurant");
 });
 //list api for food comment
 Route::group(['prefix'=>'foodcomment'],function(){
@@ -95,6 +96,14 @@ Route::group(['prefix'=>'user'],function(){
 Route::group(['prefix'=>'restaurant'],function(){
     //get
     Route::get('/getallrestaurant',"RestaurantController@getAllRestaurant");
+    Route::get('/getrestaurantbynameorbydescription/{keyword}',"RestaurantController@getRestaurantByNameOrByDescription");
+    
+});
+
+//route user report
+Route::group(['prefix'=>'userreport'],function(){
+    //post
+    Route::post('/insertuserreport',"UserReportController@insertUserReport");
     
 });
 

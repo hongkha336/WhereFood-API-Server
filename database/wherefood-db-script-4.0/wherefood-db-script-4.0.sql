@@ -64,20 +64,10 @@ CREATE TABLE `food_comment` (
   `CommentID` int(11) NOT NULL AUTO_INCREMENT,
   `CommentToken` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CommentContent` text COLLATE utf8_unicode_ci NOT NULL,
+  `SurveyPoint` int(11) NOT NULL,
+  `datetime_comment` bigint(20) NOT NULL,
   `Status` int NOT NULL,
   PRIMARY KEY (`CommentID`),
-  KEY `UserID` (`UserID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-
-DROP TABLE IF EXISTS `food_survey`;
-
-CREATE TABLE `food_survey` (
-  `FoodID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `UserID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `SurveyPoint` int(11) NOT NULL,
-  PRIMARY KEY (`FoodID`,`UserID`),
   KEY `UserID` (`UserID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -139,12 +129,15 @@ CREATE TABLE `user_bookmark` (
 DROP TABLE IF EXISTS `user_contribution`;
 
 CREATE TABLE `user_contribution` (
+  `ContributionID` int(11) NOT NULL AUTO_INCREMENT,
   `UserAccount` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `RestaurantID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `FoodID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `ReportTime` bigint(20) NOT NULL,
-  `Comment` text COLLATE utf8_unicode_ci NOT NULL,
+  `Comment` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ContributionType` int DEFAULT NULL,
   `Status` int NOT NULL,
-  PRIMARY KEY (`UserAccount`,`RestaurantID`)
+  PRIMARY KEY (`ContributionID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -154,8 +147,10 @@ CREATE TABLE `user_report` (
   `ReportID` int(11) NOT NULL AUTO_INCREMENT,
   `UserAccount` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `ReportTypeID` int(11) NOT NULL,
+  `FoodID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `MetaData1` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `MetaData2` text COLLATE utf8_unicode_ci NOT NULL,
+  `ReportDatetime` bigint(20) DEFAULT NULL,
   `Status` int DEFAULT NULL,
   PRIMARY KEY (`ReportID`),
   KEY `ReportTypeID` (`ReportTypeID`),
@@ -165,12 +160,25 @@ CREATE TABLE `user_report` (
 DROP TABLE IF EXISTS `restaurant`;
 
 CREATE TABLE `restaurant` (
-  `RestaurantID` int COLLATE utf8_unicode_ci NOT NULL AUTO_INCREMENT,
+  `RestaurantID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `RestaurantName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `RestaurantAddress` varchar(255) DEFAULT NULL,
   `Longitude` varchar(50) DEFAULT NULL,
   `Latitude` varchar(50) DEFAULT NULL,
   `Status` int DEFAULT NULL,
-  PRIMARY KEY (`restaurant`)
+  PRIMARY KEY (`RestaurantID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `token`;
+
+CREATE TABLE `token` (
+  `TokenID` int COLLATE utf8_unicode_ci NOT NULL AUTO_INCREMENT,
+  `TokenString` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Invalid` int DEFAULT NULL,
+  `UserAccount` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Status` int DEFAULT NULL,
+  PRIMARY KEY (`TokenID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 

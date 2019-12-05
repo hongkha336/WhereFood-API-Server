@@ -105,4 +105,10 @@ class FoodController extends Controller
         return response()->json($food,200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    //add Food 
+    public function addFoodWithInfoRestaurant(Request $request)
+    {
+        $result=FoodModel::addFoodWithInfoRestaurant($request);
+        echo $result;
+    }
 }

@@ -155,4 +155,51 @@ class FoodModel extends Model
         ->where("FoodID",$id)
         ->first(); 
     }
+
+    //add Food with information Restaurant 
+    public static function addFoodWithInfoRestaurant($request)
+    {
+        $restaurant = DB::table('restaurant')->insert(
+            [
+                'RestaurantID'      => $request->input('RestaurantID'),
+                'RestaurantName'    => "Unlocated Restaurant",
+                'RestaurantAddress' => $request->input('RestaurantAddress'),
+                'Longitude'         => $request->input('Longitude'),
+                'Latitude'          => $request->input('Latitude'),
+                'Status'            => 1
+            ]
+        );
+        if($restaurant==0)
+        {
+            return 0;
+        }
+        $contribution = DB::table('user_contribution')->insert(
+            [
+                'UserAccount'       => $request->input('UserAccount'),
+                'RestaurantID'      => $request->input('RestaurantID'),
+                'FoodID'            => $request->input('FoodID'),
+                'ReportTime'        => $request->input('ReportTime'),
+                'ContributionType'  => 1,
+                'Status'            => 1
+            ]
+        );
+        if($contribution==0)
+        {
+            return 0;
+        }
+        return DB::table('food')->insert(
+            [
+                'FoodID'            => $request->input('FoodID'),
+                'FoodName'          => $request->input('FoodName'),
+                'PictureToken'      => $request->input('PictureToken'),
+                'Prices'            => $request->input('Prices'),
+                'ShortDescription'  => $request->input('ShortDescription'),
+                'LongDescription'   => $request->input('LongDescription'),
+                'AvgSurvey'         => 0,
+                'RestaurantID'      => $request->input('RestaurantID'),
+                'Status'            => 2
+            ]
+        );
+    }
+
 }

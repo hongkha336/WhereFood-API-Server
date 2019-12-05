@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\UserModel;
+use App\UserModel; 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 
 class UserController extends Controller
-{
+{      
     
     //get all user
     public function getAllUser()

@@ -47,7 +47,7 @@ CREATE TABLE `food` (
   `PictureToken` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Prices` bigint(20) DEFAULT NULL,
   `ShortDescription` text COLLATE utf8_unicode_ci,
-  `LongDescriptioon` text COLLATE utf8_unicode_ci,
+  `LongDescription` text COLLATE utf8_unicode_ci,
   `AvgSurvey` float DEFAULT NULL,
   `RestaurantID` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Status` int NOT NULL,
@@ -161,7 +161,6 @@ CREATE TABLE `restaurant` (
   `Longitude` varchar(50) DEFAULT NULL,
   `Latitude` varchar(50) DEFAULT NULL,
   `Status` int DEFAULT NULL,
-  PRIMARY KEY (`Account`),
-  KEY `Role` (`Role`)
+  PRIMARY KEY (`RestaurantID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
